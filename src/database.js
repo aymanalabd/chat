@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 (async () => {
   try {
-    const db = await mongoose.connect("mongodb://alihmaidi:alihmaidi@cluster0.89sd4b5.mongodb.net/chat?retryWrites=true&w=majority", {
+    const db = await mongoose.connect("mongodb+srv://alihmaidi:alihmaidi@cluster0.89sd4b5.mongodb.net/chat?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

@@ -1,10 +1,10 @@
 import app from "./app.js";
 import "./database.js";
-import https from "https";
+import http from "http";
 import {Server} from "socket.io";
 import sockets from "./sockets.js";
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 const io =new Server(server,{
 
     cors: {
