@@ -1,19 +1,19 @@
 import express from "express";
 import path from "path";
 
+
+
 const app = express();
-app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', '*');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
 // settings
 app.set("port",3000);
-
+app.set("view engine","ejs");
+app.set("views","src/views");
 // static files
-app.use(express.static(path.join(path.resolve(), "public")));
+app.use(express.static(path.join(path.resolve(),"src","public")));
+app.get("/home",(req,res,next)=>{
 
+    res.render("home")
+
+})
 // starting the server
 export default app;

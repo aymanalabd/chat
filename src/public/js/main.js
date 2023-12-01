@@ -1,6 +1,6 @@
 $(function () {
   // socket.io client side connection
-  const socket = io.connect("http://localhost:3000");
+  const socket = io.connect();
 
   // obtaining DOM elements from the Chat Interface
   const $messageForm = $("#message-form");
