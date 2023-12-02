@@ -2,6 +2,7 @@ $(function () {
   // socket.io client side connection
   const socket = io.connect();
 
+
   // obtaining DOM elements from the Chat Interface
   const $messageForm = $("#message-form");
   const $messageBox = $("#message");
@@ -17,7 +18,9 @@ $(function () {
 
   $nickForm.submit((e) => {
     e.preventDefault();
+    localStorage.setItem("name",$nickname.val())
     socket.emit("new user", $nickname.val(), (data) => {
+        
       if (data) {
         $("#nickWrap").hide();
         // $('#contentWrap').show();
@@ -37,13 +40,19 @@ $(function () {
   // events
   $messageForm.submit((e) => {
     e.preventDefault();
-    socket.emit("send message", $messageBox.val(), (data) => {
+    console.log($messageBox.val())
+
+    // socket.emit("new user", localStorage.getItem("name"));
+
+    socket.emit("send message", {msg:$messageBox.val(),nick:localStorage.getItem("name")}, (data) => {
       $chat.append(`<p class="error">${data}</p>`);
     });
     $messageBox.val("");
   });
 
   socket.on("new message", (data) => {
+    console.log(data)
+
     displayMsg(data);
   });
 

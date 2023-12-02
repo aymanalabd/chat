@@ -30,7 +30,7 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand mx-auto" href="/">
-      Javascript FullStack Chat
+      Ali Hmaidi :) Chat
     </a>
   </nav>
 
@@ -104,6 +104,31 @@
   <!-- <script src="/socket.io/socket.io.js"></script> -->
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" integrity="sha384-mZLF4UVrpi/QTWPA7BjNPEnkIfRFn4ZEO3Qt/HFklTJBj/gBOV8G3HcKn4NfQblz" crossorigin="anonymous"></script>
   <script  src="/js/main.js"></script>
+  <script>
+ $( window ).on( "load", function() {
+  const socket = io.connect();
+
+  if(localStorage.getItem("name")!=undefined){
+      
+    $("#nickWrap").hide();
+          // $('#contentWrap').show();
+          document.querySelector("#contentWrap").style.display = "flex";
+          $("#message").focus();
+        
+    socket.emit("new user", localStorage.getItem("name"), (data) => {
+        
+        
+      });
+      
+
+    }
+
+
+
+
+    });
+
+  </script>
 </body>
 
 </html>

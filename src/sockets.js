@@ -15,6 +15,7 @@ export default io => {
         cb(false);
       } else {
         cb(true);
+
         socket.nickname = data;
         users[socket.nickname] = socket;
         updateNicknames();
@@ -23,7 +24,8 @@ export default io => {
 
     // receive a message a broadcasting
     socket.on('send message', async (data, cb) => {
-      var msg = data.trim();
+      var msg = data.msg.trim();
+      
 
       if (msg.substr(0, 3) === '/w ') {
         msg = msg.substr(3);
@@ -34,7 +36,7 @@ export default io => {
           if (name in users) {
             users[name].emit('whisper', {
               msg,
-              nick: socket.nickname 
+              nick: data.nick 
             });
           } else {
             cb('Error! Enter a valid User');
@@ -45,13 +47,13 @@ export default io => {
       } else {
         var newMsg = new Chat({
           msg,
-          nick: socket.nickname
+          nick: data.nick
         });
         await newMsg.save();
       
         io.sockets.emit('new message', {
           msg,
-          nick: socket.nickname
+          nick: data.nick
         });
       }
     });
